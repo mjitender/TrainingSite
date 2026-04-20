@@ -29,7 +29,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['StructuredData', { ...StructuredData }],
   ['RowSplitter', { ...RowSplitter }],
   ['RichText', { ...RichText }],
-  ['Promo', { ...Promo }],
+  // ['Promo', { ...Promo }],
   ['CustomBanner', { ...CustomBanner }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['PageContent', { ...PageContent }],
