@@ -14,7 +14,7 @@ export const Default = (props: RichTextBlockAProps): JSX.Element => {
   return (
     <div className={`component ${props.params.styles}`} id={id ? id : undefined}>
       <div className="component-content">
-       <h1>This is a custom component</h1>
+        <h1>This is the custom Rich Text Component</h1>
       </div>
     </div>
   );
