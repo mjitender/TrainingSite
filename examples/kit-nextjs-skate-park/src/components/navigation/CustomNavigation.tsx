@@ -1,119 +1,134 @@
 'use client';
-import React from 'react';
-import {
-  Link,
-  LinkField,
-  Text,
-  TextField,
-  useSitecore,
-} from '@sitecore-content-sdk/nextjs';
+import React, { useState, JSX } from 'react';
+import { Link, LinkField, Text, TextField, useSitecore } from '@sitecore-content-sdk/nextjs';
 import { ComponentProps } from 'lib/component-props';
 
-interface NavLinkItem {
-  Link: LinkField;
-  Label: TextField;
-}
-
 interface Fields {
+  Id: string;
+  DisplayName: string;
   Title: TextField;
-  NavLink1: NavLinkItem;
-  NavLink2: NavLinkItem;
-  NavLink3: NavLinkItem;
+  NavigationTitle: TextField;
+  Href: string;
+  Querystring: string;
+  Children: Array<Fields>;
+  Styles: string[];
 }
 
-interface CustomNavigationProps extends ComponentProps {
+interface NavigationListItemProps {
+  fields: Fields;
+  handleClick: (event?: React.MouseEvent<HTMLElement>) => void;
+  relativeLevel: number;
+}
+
+interface NavigationProps extends ComponentProps {
   fields: Fields;
 }
 
-const NavItem = ({ item }: { item: NavLinkItem }) => {
+const getTextContent = (fields: Fields): JSX.Element | string => {
+  if (fields.NavigationTitle) return <Text field={fields.NavigationTitle} />;
+  if (fields.Title) return <Text field={fields.Title} />;
+  return fields.DisplayName;
+};
+
+const getLinkField = (fields: Fields): LinkField => ({
+  value: {
+    href: fields.Href,
+    title:
+      fields.NavigationTitle?.value?.toString() ??
+      fields.Title?.value?.toString() ??
+      fields.DisplayName,
+    querystring: fields.Querystring,
+  },
+});
+
+const NavigationListItem: React.FC<NavigationListItemProps> = ({
+  fields,
+  handleClick,
+  relativeLevel,
+}) => {
+  const [isActive, setIsActive] = useState(false);
   const { page } = useSitecore();
 
-  if (!item?.Link) return null;
+  const classNames = [...fields.Styles, `rel-level${relativeLevel}`, isActive ? 'active' : ''].join(
+    ' '
+  );
+
+  const hasChildren = fields.Children?.length > 0;
+  const children = hasChildren
+    ? fields.Children.map((fields, index) => (
+        <NavigationListItem
+          key={`${index}-${fields.Id}`}
+          fields={fields}
+          handleClick={handleClick}
+          relativeLevel={relativeLevel + 1}
+        />
+      ))
+    : null;
 
   return (
-    <li className="custom-nav-item">
-      <Link field={item.Link} editable={page.mode.isEditing}>
-        {item.Label ? <Text field={item.Label} /> : item.Link.value?.title}
-      </Link>
+    <li className={classNames} key={fields.Id} tabIndex={0}>
+      <div
+        className={`navigation-title ${hasChildren ? 'child' : ''}`}
+        onClick={() => setIsActive(!isActive)}
+      >
+        <Link field={getLinkField(fields)} editable={page.mode.isEditing} onClick={handleClick}>
+          {getTextContent(fields)}
+        </Link>
+      </div>
+      {hasChildren && <ul className="clearfix">{children}</ul>}
     </li>
   );
 };
 
-export const CustomNavigation = ({ params, fields }: CustomNavigationProps) => {
+export const Default = ({ params, fields }: NavigationProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { page } = useSitecore();
   const { styles, RenderingIdentifier: id } = params;
 
-  if (!fields) {
+  if (!Object.values(fields).length) {
     return (
-      <div className={`component custom-navigation ${styles}`} id={id}>
-        <div className="component-content">[Custom Navigation]</div>
+      <div className={`component navigation ${styles}`} id={id}>
+        <div className="component-content">[Hello]</div>
       </div>
     );
   }
 
+  const handleToggleMenu = (event?: React.MouseEvent<HTMLElement>, forceState?: boolean) => {
+    if (event && page.mode.isEditing) {
+      event.preventDefault();
+    }
+
+    setIsMenuOpen(forceState ?? !isMenuOpen);
+  };
+
+  const navigationItems = Object.values(fields)
+    .filter(Boolean)
+    .map((item: Fields, index) => (
+      <NavigationListItem
+        key={`${index}-${item.Id}`}
+        fields={item}
+        handleClick={(event) => handleToggleMenu(event, false)}
+        relativeLevel={1}
+      />
+    ));
+
   return (
-    <div className={`component custom-navigation ${styles}`} id={id}>
-      <div className="custom-nav-container">
-        {/* Title */}
-        <h2 className="custom-nav-title">
-          <Text field={fields.Title} />
-        </h2>
-
-        {/* Links */}
-        <nav>
-          <ul className="custom-nav-list">
-            <NavItem item={fields.NavLink1} />
-            <NavItem item={fields.NavLink2} />
-            <NavItem item={fields.NavLink3} />
-          </ul>
-        </nav>
-      </div>
-
-      {/* Scoped CSS */}
-      <style jsx>{`
-        .custom-navigation {
-          padding: 20px;
-        }
-
-        .custom-nav-container {
-          background: linear-gradient(135deg, #0f3c68, #1e5fa3);
-          border-radius: 12px;
-          padding: 20px;
-          color: #ffffff;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .custom-nav-title {
-          font-size: 1.5rem;
-          margin-bottom: 15px;
-          color: #cfe8ff;
-        }
-
-        .custom-nav-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-
-        .custom-nav-item {
-          margin-bottom: 10px;
-        }
-
-        .custom-nav-item a {
-          display: block;
-          padding: 10px 14px;
-          border-radius: 8px;
-          text-decoration: none;
-          color: #ffffff;
-          background-color: rgba(255, 255, 255, 0.1);
-          transition: all 0.3s ease;
-        }
-
-        .custom-nav-item a:hover {
-          background-color: #4da3ff;
-          color: #002b5c;
-          transform: translateX(5px);
-        }
-      `}</style>
+    <div className={`component navigation ${styles}`} id={id}>
+      <label className="menu-mobile-navigate-wrapper">
+        <input
+          type="checkbox"
+          className="menu-mobile-navigate"
+          checked={isMenuOpen}
+          onChange={() => handleToggleMenu()}
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        />
+        <div className="menu-humburger" />
+        <div className="component-content">
+          <nav>
+            <ul className="clearfix">{navigationItems}</ul>
+          </nav>
+        </div>
+      </label>
     </div>
   );
 };

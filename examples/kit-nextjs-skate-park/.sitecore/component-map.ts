@@ -13,6 +13,7 @@ import * as Promo from 'src/components/promo/Promo';
 import * as CustomBanner from 'src/components/promo/CustomBanner';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 import * as PageContent from 'src/components/page-content/PageContent';
+import * as CustomRichText from 'src/components/page-content/CustomRichText';
 import * as Navigation from 'src/components/navigation/Navigation';
 import * as CustomNavigation from 'src/components/navigation/CustomNavigation';
 import * as LinkList from 'src/components/link-list/LinkList';
@@ -34,8 +35,9 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['CustomBanner', { ...CustomBanner }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['PageContent', { ...PageContent }],
+  ['CustomRichText', { ...CustomRichText }],
   ['Navigation', { ...Navigation, componentType: 'client' }],
-  ['CustomNavigation', { ...CustomNavigation }],
+  ['CustomNavigation', { ...CustomNavigation, componentType: 'client' }],
   ['LinkList', { ...LinkList }],
   ['Image', { ...Image }],
   ['ContentBlock', { ...ContentBlock }],
