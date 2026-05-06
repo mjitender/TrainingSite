@@ -10,7 +10,9 @@ import * as StructuredData from 'src/components/structured-data/StructuredData';
 import * as RowSplitter from 'src/components/row-splitter/RowSplitter';
 import * as RichText from 'src/components/rich-text/RichText';
 import * as Promo from 'src/components/promo/Promo';
+import * as PracticeBanner from 'src/components/promo/PracticeBanner';
 import * as ModuleEightHero from 'src/components/promo/ModuleEightHero';
+import * as HeroBanner2 from 'src/components/promo/HeroBanner2';
 import * as CustomBanner from 'src/components/promo/CustomBanner';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 import * as PageContent from 'src/components/page-content/PageContent';
@@ -33,7 +35,9 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['RowSplitter', { ...RowSplitter }],
   ['RichText', { ...RichText }],
   ['Promo', { ...Promo }],
+  ['PracticeBanner', { ...PracticeBanner }],
   ['ModuleEightHero', { ...ModuleEightHero }],
+  ['HeroBanner2', { ...HeroBanner2 }],
   ['CustomBanner', { ...CustomBanner }],
   ['PartialDesignDynamicPlaceholder', { ...PartialDesignDynamicPlaceholder }],
   ['PageContent', { ...PageContent }],
