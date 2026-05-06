@@ -37,7 +37,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['PageContent', { ...PageContent }],
   ['CustomRichText', { ...CustomRichText }],
   ['Navigation', { ...Navigation, componentType: 'client' }],
-  ['CustomNavigation', { ...CustomNavigation, componentType: 'client' }],
+  ['CustomNavigation', { ...CustomNavigation }],
   ['LinkList', { ...LinkList }],
   ['Image', { ...Image }],
   ['ContentBlock', { ...ContentBlock }],
