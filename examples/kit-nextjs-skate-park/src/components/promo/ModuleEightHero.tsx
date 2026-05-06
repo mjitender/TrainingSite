@@ -59,6 +59,7 @@ const ModuleEightHeroContent = (props: ModuleEightHeroContentProps): JSX.Element
         </figure>
         <div className="module-eight-hero-text" itemProp="description">
           {renderText(fields)}
+          <h1>Module 8 ModuleEightHero</h1>
         </div>
         <StructuredData
           id={`jsonld-product-${id ?? 'moduleeighthero'}`}
