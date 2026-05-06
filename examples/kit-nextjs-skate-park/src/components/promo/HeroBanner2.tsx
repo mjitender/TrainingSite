@@ -30,36 +30,36 @@ const HeroBanner2 = (props: HeroProps): JSX.Element => {
       id={id}
       style={{
         width: '100%',
-        padding: '80px 20px',
-        background: 'linear-gradient(135deg, #0f766e, #14b8a6)',
-        color: '#ffffff',
-        fontFamily: 'system-ui, sans-serif',
+        padding: '100px 40px',
+        background: 'linear-gradient(135deg, #1e293b, #334155)',
+        color: '#f8fafc',
+        fontFamily: '"Poppins", sans-serif',
       }}
     >
       <div
         style={{
-          maxWidth: '1200px',
+          maxWidth: '1250px',
           margin: '0 auto',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '40px',
+          gap: '60px',
           flexWrap: 'wrap',
         }}
       >
         {/* LEFT SIDE */}
         <div
           style={{
-            flex: '1 1 500px',
+            flex: '1 1 520px',
           }}
         >
           <h1
             style={{
-              fontSize: '42px',
-              fontWeight: 700,
-              marginBottom: '20px',
-              lineHeight: '1.2',
-              letterSpacing: '-0.5px',
+              fontSize: '52px',
+              fontWeight: 800,
+              marginBottom: '28px',
+              lineHeight: '1.15',
+              letterSpacing: '-1px',
             }}
           >
             {fields.Title?.value}
@@ -67,10 +67,11 @@ const HeroBanner2 = (props: HeroProps): JSX.Element => {
 
           <div
             style={{
-              fontSize: '18px',
-              lineHeight: '1.7',
-              opacity: 0.95,
-              maxWidth: '550px',
+              fontSize: '19px',
+              lineHeight: '1.9',
+              fontWeight: 400,
+              opacity: 0.9,
+              maxWidth: '600px',
             }}
           >
             <ContentSdkRichText field={fields.Text} />
@@ -80,7 +81,7 @@ const HeroBanner2 = (props: HeroProps): JSX.Element => {
         {/* RIGHT SIDE */}
         <div
           style={{
-            flex: '1 1 400px',
+            flex: '1 1 420px',
             display: 'flex',
             justifyContent: 'center',
           }}
@@ -89,10 +90,11 @@ const HeroBanner2 = (props: HeroProps): JSX.Element => {
             field={fields.Image}
             style={{
               width: '100%',
-              maxWidth: '500px',
+              maxWidth: '520px',
               height: 'auto',
-              borderRadius: '16px',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.25)',
+              borderRadius: '24px',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.35)',
+              border: '4px solid rgba(255,255,255,0.08)',
             }}
           />
         </div>
