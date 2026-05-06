@@ -114,7 +114,7 @@ export const Default = ({ params, fields }: NavigationProps) => {
 
   return (
     <div className={`component navigation ${styles}`} id={id}>
-      <label className="menu-mobile-navigate-wrapper">
+      {/* <label className="menu-mobile-navigate-wrapper">
         <input
           type="checkbox"
           className="menu-mobile-navigate"
@@ -128,7 +128,9 @@ export const Default = ({ params, fields }: NavigationProps) => {
             <ul className="clearfix">{navigationItems}</ul>
           </nav>
         </div>
-      </label>
+      </label> */}
     </div>
   );
 };
+
+

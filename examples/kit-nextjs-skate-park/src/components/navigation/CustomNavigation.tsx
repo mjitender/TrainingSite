@@ -14,6 +14,8 @@ export const Default = (props: RichTextBlockAProps): JSX.Element => {
   const id = props.params.RenderingIdentifier;
   // const text = props.rendering.fields?.text.value;
 
+  console.log(props);
+
   return (
     <div
       className={`component ${props.params.styles}`}
