@@ -1,120 +1,113 @@
+
+
 // import React, { JSX } from 'react';
 // import {
 //   NextImage as ContentSdkImage,
-//   Link as ContentSdkLink,
 //   RichText as ContentSdkRichText,
 //   ImageField,
 //   Field,
-//   LinkField,
 // } from '@sitecore-content-sdk/nextjs';
 // import { ComponentProps } from 'lib/component-props';
-// import StructuredData from 'components/structured-data/StructuredData';
-// import { buildProductJsonLd } from 'src/lib/structured-data/schema';
 
-// interface ModuleEightHeroFields {
+// interface HeroFields {
 //   Image: ImageField;
-//   ModuleEightHeroText: Field<string>;
-//   ModuleEightHeroLink: LinkField;
-//   ModuleEightHeroText2: Field<string>;
-//   ModuleEightHeroIcon2: ImageField;
+//   Title: Field<string>;
+//   Text: Field<string>;
+//   ButtonText: Field<string>;
 // }
 
-// type ModuleEightHeroProps = ComponentProps & {
-//   fields: ModuleEightHeroFields;
+// type HeroProps = ComponentProps & {
+//   fields: HeroFields;
 // };
 
-// interface ModuleEightHeroContentProps extends ModuleEightHeroProps {
-//   renderText: (fields: ModuleEightHeroFields) => JSX.Element;
-// }
-
-// const ModuleEightHeroContent = (props: ModuleEightHeroContentProps): JSX.Element => {
-//   const { fields, params, renderText } = props;
-//   const { styles, RenderingIdentifier: id } = params;
-
-//   const Wrapper = ({ children }: { children: JSX.Element }): JSX.Element => (
-//     <article
-//       className={`component module-eight-hero ${styles}`}
-//       id={id}
-//       itemScope
-//       itemType="https://schema.org/Product"
-//     >
-//       <div className="component-content">{children}</div>
-//     </article>
-//   );
+// const HeroBanner = (props: HeroProps): JSX.Element => {
+//   const { fields, params } = props;
+//   const { RenderingIdentifier: id } = params;
 
 //   if (!fields) {
-//     return (
-//       <Wrapper>
-//         <span className="is-empty-hint">ModuleEightHero</span>
-//       </Wrapper>
-//     );
+//     return <span>Hero</span>;
 //   }
 
-//   console.log(fields);
-
 //   return (
-//     <Wrapper>
-//       <>
-//         <figure className="field-moduleeightheroicon" itemProp="image">
-//           <ContentSdkImage field={fields.Image.value} />
-//         </figure>
-//         <div className="module-eight-hero-text" itemProp="description">
-//           {renderText(fields)}
-//           <h1>Module 8 ModuleEightHero</h1>
+//     <section
+//       id={id}
+//       style={{
+//         width: '100%',
+//         padding: '80px 20px',
+//         background: 'linear-gradient(135deg, #0f766e, #14b8a6)',
+//         color: '#ffffff',
+//         fontFamily: 'system-ui, sans-serif',
+//       }}
+//     >
+//       <div
+//         style={{
+//           maxWidth: '1200px',
+//           margin: '0 auto',
+//           display: 'flex',
+//           alignItems: 'center',
+//           justifyContent: 'space-between',
+//           gap: '40px',
+//           flexWrap: 'wrap',
+//         }}
+//       >
+//         {/* LEFT SIDE */}
+//         <div
+//           style={{
+//             flex: '1 1 500px',
+//           }}
+//         >
+//           <h1
+//             style={{
+//               fontSize: '42px',
+//               fontWeight: 700,
+//               marginBottom: '20px',
+//               lineHeight: '1.2',
+//               letterSpacing: '-0.5px',
+//             }}
+//           >
+//             {fields.Title?.value}
+//           </h1>
+
+//           <div
+//             style={{
+//               fontSize: '18px',
+//               lineHeight: '1.7',
+//               opacity: 0.95,
+//               maxWidth: '550px',
+//             }}
+//           >
+//             <ContentSdkRichText field={fields.Text} />
+//           </div>
 //         </div>
-//         <StructuredData
-//           id={`jsonld-product-${id ?? 'moduleeighthero'}`}
-//           data={buildProductJsonLd({
-//             name:
-//               fields.ModuleEightHeroLink?.value?.title ||
-//               (fields.ModuleEightHeroText?.value
-//                 ? String(fields.ModuleEightHeroText.value)
-//                 : undefined),
-//             descriptionHtml: fields.ModuleEightHeroText?.value
-//               ? String(fields.ModuleEightHeroText.value)
-//               : undefined,
-//             url: fields.ModuleEightHeroLink?.value?.href,
-//             image: (fields.ModuleEightHeroIcon as unknown as {
-//               value?: { src?: string };
-//             })?.value?.src,
-//           })}
-//         />
-//       </>
-//     </Wrapper>
+
+//         {/* RIGHT SIDE */}
+//         <div
+//           style={{
+//             flex: '1 1 400px',
+//             display: 'flex',
+//             justifyContent: 'center',
+//           }}
+//         >
+//           <ContentSdkImage
+//             field={fields.Image}
+//             style={{
+//               width: '100%',
+//               maxWidth: '500px',
+//               height: 'auto',
+//               borderRadius: '16px',
+//               boxShadow: '0 20px 50px rgba(0,0,0,0.25)',
+//             }}
+//           />
+//         </div>
+//       </div>
+//     </section>
 //   );
 // };
 
-// export const Default = (props: ModuleEightHeroProps): JSX.Element => {
-//   const renderText = (fields: ModuleEightHeroFields) => (
-//     <>
-//       <div className="field-moduleeightherotext">
-//         <ContentSdkRichText field={fields.ModuleEightHeroText} />
-//       </div>
-//       <div className="field-moduleeightherolink">
-//         <ContentSdkLink field={fields.ModuleEightHeroLink} />
-//       </div>
-//     </>
-//   );
-
-//   return <ModuleEightHeroContent {...props} renderText={renderText} />;
-// };
-
-// export const WithText = (props: ModuleEightHeroProps): JSX.Element => {
-//   const renderText = (fields: ModuleEightHeroFields) => (
-//     <>
-//       <div className="field-moduleeightherotext">
-//         <ContentSdkRichText className="module-eight-hero-text" field={fields.ModuleEightHeroText} />
-//       </div>
-//       <div className="field-moduleeightherotext">
-//         <ContentSdkRichText className="module-eight-hero-text" field={fields.ModuleEightHeroText2} />
-//       </div>
-//     </>
-//   );
-
-//   return <ModuleEightHeroContent {...props} renderText={renderText} />;
-// };
+// export default HeroBanner;
 
 import React, { JSX } from 'react';
+import Link from 'next/link';
 import {
   NextImage as ContentSdkImage,
   RichText as ContentSdkRichText,
@@ -127,6 +120,8 @@ interface HeroFields {
   Image: ImageField;
   Title: Field<string>;
   Text: Field<string>;
+  ButtonText: Field<string>;
+  ButtonLink: Field<string>;
 }
 
 type HeroProps = ComponentProps & {
@@ -135,21 +130,79 @@ type HeroProps = ComponentProps & {
 
 const HeroBanner = (props: HeroProps): JSX.Element => {
   const { fields, params } = props;
-  const { RenderingIdentifier: id } = params;
+  const { RenderingIdentifier: id, Variant } = params;
 
   if (!fields) {
     return <span>Hero</span>;
   }
+
+  /**
+   * VARIANTS
+   * default
+   * dark
+   * light
+   * split
+   */
+
+  const variantStyles: Record<
+    string,
+    {
+      background: string;
+      textColor: string;
+      buttonBg: string;
+      buttonColor: string;
+      secondaryButtonBg: string;
+      secondaryButtonColor: string;
+    }
+  > = {
+    dark: {
+      background: 'linear-gradient(135deg, #0f172a, #1e293b)',
+      textColor: '#ffffff',
+      buttonBg: '#14b8a6',
+      buttonColor: '#ffffff',
+      secondaryButtonBg: 'transparent',
+      secondaryButtonColor: '#ffffff',
+    },
+    light: {
+      background: 'linear-gradient(135deg, #f8fafc, #e2e8f0)',
+      textColor: '#0f172a',
+      buttonBg: '#0f766e',
+      buttonColor: '#ffffff',
+      secondaryButtonBg: 'transparent',
+      secondaryButtonColor: '#0f172a',
+    },
+    split: {
+      background: 'linear-gradient(135deg, #1d4ed8, #2563eb)',
+      textColor: '#ffffff',
+      buttonBg: '#ffffff',
+      buttonColor: '#1d4ed8',
+      secondaryButtonBg: 'transparent',
+      secondaryButtonColor: '#ffffff',
+    },
+    default: {
+      background: 'linear-gradient(135deg, #0f766e, #14b8a6)',
+      textColor: '#ffffff',
+      buttonBg: '#ffffff',
+      buttonColor: '#0f766e',
+      secondaryButtonBg: 'transparent',
+      secondaryButtonColor: '#ffffff',
+    },
+  };
+
+  const selectedVariant =
+    variantStyles[Variant as keyof typeof variantStyles] ||
+    variantStyles.default;
 
   return (
     <section
       id={id}
       style={{
         width: '100%',
-        padding: '80px 20px',
-        background: 'linear-gradient(135deg, #0f766e, #14b8a6)',
-        color: '#ffffff',
+        padding: '90px 24px',
+        background: selectedVariant.background,
+        color: selectedVariant.textColor,
         fontFamily: 'system-ui, sans-serif',
+        overflow: 'hidden',
       }}
     >
       <div
@@ -159,23 +212,38 @@ const HeroBanner = (props: HeroProps): JSX.Element => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '40px',
+          gap: '60px',
           flexWrap: 'wrap',
         }}
       >
         {/* LEFT SIDE */}
         <div
           style={{
-            flex: '1 1 500px',
+            flex: '1 1 520px',
           }}
         >
+          <div
+            style={{
+              display: 'inline-block',
+              padding: '8px 16px',
+              borderRadius: '999px',
+              background: 'rgba(255,255,255,0.15)',
+              fontSize: '14px',
+              fontWeight: 600,
+              marginBottom: '24px',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            Modern Experience Platform
+          </div>
+
           <h1
             style={{
-              fontSize: '42px',
-              fontWeight: 700,
-              marginBottom: '20px',
-              lineHeight: '1.2',
-              letterSpacing: '-0.5px',
+              fontSize: 'clamp(42px, 6vw, 68px)',
+              fontWeight: 800,
+              marginBottom: '24px',
+              lineHeight: '1.05',
+              letterSpacing: '-2px',
             }}
           >
             {fields.Title?.value}
@@ -184,31 +252,99 @@ const HeroBanner = (props: HeroProps): JSX.Element => {
           <div
             style={{
               fontSize: '18px',
-              lineHeight: '1.7',
-              opacity: 0.95,
-              maxWidth: '550px',
+              lineHeight: '1.8',
+              opacity: 0.92,
+              maxWidth: '620px',
+              marginBottom: '36px',
             }}
           >
             <ContentSdkRichText field={fields.Text} />
+          </div>
+
+          {/* BUTTONS */}
+          <div
+            style={{
+              display: 'flex',
+              gap: '16px',
+              flexWrap: 'wrap',
+            }}
+          >
+            {fields.ButtonText?.value && (
+              <Link
+                href={fields.ButtonLink?.value || '#'}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '14px 28px',
+                  borderRadius: '12px',
+                  background: selectedVariant.buttonBg,
+                  color: selectedVariant.buttonColor,
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                  fontSize: '16px',
+                  transition: 'all 0.25s ease',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.18)',
+                }}
+              >
+                {fields.ButtonText.value}
+              </Link>
+            )}
+
+            <Link
+              href="#"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '14px 28px',
+                borderRadius: '12px',
+                border: `1px solid rgba(255,255,255,0.35)`,
+                background: selectedVariant.secondaryButtonBg,
+                color: selectedVariant.secondaryButtonColor,
+                textDecoration: 'none',
+                fontWeight: 600,
+                fontSize: '16px',
+                backdropFilter: 'blur(8px)',
+              }}
+            >
+              Learn More
+            </Link>
           </div>
         </div>
 
         {/* RIGHT SIDE */}
         <div
           style={{
-            flex: '1 1 400px',
+            flex: '1 1 420px',
             display: 'flex',
             justifyContent: 'center',
+            position: 'relative',
           }}
         >
+          <div
+            style={{
+              position: 'absolute',
+              width: '320px',
+              height: '320px',
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.12)',
+              filter: 'blur(60px)',
+              zIndex: 0,
+            }}
+          />
+
           <ContentSdkImage
             field={fields.Image}
             style={{
+              position: 'relative',
+              zIndex: 1,
               width: '100%',
-              maxWidth: '500px',
+              maxWidth: '560px',
               height: 'auto',
-              borderRadius: '16px',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.25)',
+              borderRadius: '24px',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.35)',
+              border: '1px solid rgba(255,255,255,0.15)',
             }}
           />
         </div>
