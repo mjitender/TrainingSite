@@ -128,81 +128,32 @@ type HeroProps = ComponentProps & {
   fields: HeroFields;
 };
 
-const HeroBanner = (props: HeroProps): JSX.Element => {
+const HeroTemplate = (
+  props: HeroProps,
+  styles: {
+    background: string;
+    textColor: string;
+    buttonBg: string;
+    buttonColor: string;
+  }
+): JSX.Element => {
   const { fields, params } = props;
-  const { RenderingIdentifier: id, Variant } = params;
+  const { RenderingIdentifier: id } = params;
 
   if (!fields) {
-    return <span>Hero</span>;
+    return <span>Hero Banner</span>;
   }
-
-  /**
-   * VARIANTS
-   * default
-   * dark
-   * light
-   * split
-   */
-
-  const variantStyles: Record<
-    string,
-    {
-      background: string;
-      textColor: string;
-      buttonBg: string;
-      buttonColor: string;
-      secondaryButtonBg: string;
-      secondaryButtonColor: string;
-    }
-  > = {
-    dark: {
-      background: 'linear-gradient(135deg, #0f172a, #1e293b)',
-      textColor: '#ffffff',
-      buttonBg: '#14b8a6',
-      buttonColor: '#ffffff',
-      secondaryButtonBg: 'transparent',
-      secondaryButtonColor: '#ffffff',
-    },
-    light: {
-      background: 'linear-gradient(135deg, #f8fafc, #e2e8f0)',
-      textColor: '#0f172a',
-      buttonBg: '#0f766e',
-      buttonColor: '#ffffff',
-      secondaryButtonBg: 'transparent',
-      secondaryButtonColor: '#0f172a',
-    },
-    split: {
-      background: 'linear-gradient(135deg, #1d4ed8, #2563eb)',
-      textColor: '#ffffff',
-      buttonBg: '#ffffff',
-      buttonColor: '#1d4ed8',
-      secondaryButtonBg: 'transparent',
-      secondaryButtonColor: '#ffffff',
-    },
-    default: {
-      background: 'linear-gradient(135deg, #0f766e, #14b8a6)',
-      textColor: '#ffffff',
-      buttonBg: '#ffffff',
-      buttonColor: '#0f766e',
-      secondaryButtonBg: 'transparent',
-      secondaryButtonColor: '#ffffff',
-    },
-  };
-
-  const selectedVariant =
-    variantStyles[Variant as keyof typeof variantStyles] ||
-    variantStyles.default;
 
   return (
     <section
       id={id}
+      className={`component hero-banner ${params.styles || ''}`}
       style={{
         width: '100%',
         padding: '90px 24px',
-        background: selectedVariant.background,
-        color: selectedVariant.textColor,
+        background: styles.background,
+        color: styles.textColor,
         fontFamily: 'system-ui, sans-serif',
-        overflow: 'hidden',
       }}
     >
       <div
@@ -216,34 +167,18 @@ const HeroBanner = (props: HeroProps): JSX.Element => {
           flexWrap: 'wrap',
         }}
       >
-        {/* LEFT SIDE */}
+        {/* LEFT */}
         <div
           style={{
             flex: '1 1 520px',
           }}
         >
-          <div
-            style={{
-              display: 'inline-block',
-              padding: '8px 16px',
-              borderRadius: '999px',
-              background: 'rgba(255,255,255,0.15)',
-              fontSize: '14px',
-              fontWeight: 600,
-              marginBottom: '24px',
-              backdropFilter: 'blur(8px)',
-            }}
-          >
-            Modern Experience Platform
-          </div>
-
           <h1
             style={{
               fontSize: 'clamp(42px, 6vw, 68px)',
               fontWeight: 800,
               marginBottom: '24px',
-              lineHeight: '1.05',
-              letterSpacing: '-2px',
+              lineHeight: '1.1',
             }}
           >
             {fields.Title?.value}
@@ -253,98 +188,49 @@ const HeroBanner = (props: HeroProps): JSX.Element => {
             style={{
               fontSize: '18px',
               lineHeight: '1.8',
-              opacity: 0.92,
+              marginBottom: '32px',
               maxWidth: '620px',
-              marginBottom: '36px',
             }}
           >
             <ContentSdkRichText field={fields.Text} />
           </div>
 
-          {/* BUTTONS */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '16px',
-              flexWrap: 'wrap',
-            }}
-          >
-            {fields.ButtonText?.value && (
-              <Link
-                href={fields.ButtonLink?.value || '#'}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '14px 28px',
-                  borderRadius: '12px',
-                  background: selectedVariant.buttonBg,
-                  color: selectedVariant.buttonColor,
-                  textDecoration: 'none',
-                  fontWeight: 700,
-                  fontSize: '16px',
-                  transition: 'all 0.25s ease',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.18)',
-                }}
-              >
-                {fields.ButtonText.value}
-              </Link>
-            )}
-
+          {fields.ButtonText?.value && (
             <Link
-              href="#"
+              href={fields.ButtonLink?.value || '#'}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '14px 28px',
                 borderRadius: '12px',
-                border: `1px solid rgba(255,255,255,0.35)`,
-                background: selectedVariant.secondaryButtonBg,
-                color: selectedVariant.secondaryButtonColor,
+                background: styles.buttonBg,
+                color: styles.buttonColor,
                 textDecoration: 'none',
-                fontWeight: 600,
-                fontSize: '16px',
-                backdropFilter: 'blur(8px)',
+                fontWeight: 700,
               }}
             >
-              Learn More
+              {fields.ButtonText.value}
             </Link>
-          </div>
+          )}
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
         <div
           style={{
             flex: '1 1 420px',
             display: 'flex',
             justifyContent: 'center',
-            position: 'relative',
           }}
         >
-          <div
-            style={{
-              position: 'absolute',
-              width: '320px',
-              height: '320px',
-              borderRadius: '50%',
-              background: 'rgba(255,255,255,0.12)',
-              filter: 'blur(60px)',
-              zIndex: 0,
-            }}
-          />
-
           <ContentSdkImage
             field={fields.Image}
             style={{
-              position: 'relative',
-              zIndex: 1,
               width: '100%',
               maxWidth: '560px',
               height: 'auto',
               borderRadius: '24px',
-              boxShadow: '0 30px 80px rgba(0,0,0,0.35)',
-              border: '1px solid rgba(255,255,255,0.15)',
+              boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
             }}
           />
         </div>
@@ -353,4 +239,48 @@ const HeroBanner = (props: HeroProps): JSX.Element => {
   );
 };
 
-export default HeroBanner;
+/**
+ * DEFAULT VARIANT
+ */
+export const Default = (props: HeroProps): JSX.Element =>
+  HeroTemplate(props, {
+    background: 'linear-gradient(135deg, #0f766e, #14b8a6)',
+    textColor: '#ffffff',
+    buttonBg: '#ffffff',
+    buttonColor: '#0f766e',
+  });
+
+/**
+ * DARK VARIANT
+ */
+export const Dark = (props: HeroProps): JSX.Element =>
+  HeroTemplate(props, {
+    background: 'linear-gradient(135deg, #0f172a, #1e293b)',
+    textColor: '#ffffff',
+    buttonBg: '#14b8a6',
+    buttonColor: '#ffffff',
+  });
+
+/**
+ * LIGHT VARIANT
+ */
+export const Light = (props: HeroProps): JSX.Element =>
+  HeroTemplate(props, {
+    background: 'linear-gradient(135deg, #f8fafc, #e2e8f0)',
+    textColor: '#0f172a',
+    buttonBg: '#0f766e',
+    buttonColor: '#ffffff',
+  });
+
+/**
+ * SPLIT VARIANT
+ */
+export const Split = (props: HeroProps): JSX.Element =>
+  HeroTemplate(props, {
+    background: 'linear-gradient(135deg, #1d4ed8, #2563eb)',
+    textColor: '#ffffff',
+    buttonBg: '#ffffff',
+    buttonColor: '#1d4ed8',
+  });
+
+export default Default;
