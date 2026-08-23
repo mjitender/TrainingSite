@@ -1,4 +1,5 @@
 import React, { JSX } from "react";
+import Link from "next/link";
 
 import {
   ComponentParams,
@@ -46,21 +47,17 @@ export const Default = (
             maxWidth: "none",
             margin: 0,
             boxSizing: "border-box",
-
             display: "flex",
             alignItems: "center",
-
             minHeight: "68px",
             padding: "0 40px",
-
             backgroundColor: "#ffffff",
             boxShadow: "0 4px 14px rgba(0, 0, 0, 0.08)",
-
             fontFamily: "Arial, Helvetica, sans-serif",
           }}
         >
           {/* Logo */}
-          <a
+          <Link
             href="/"
             style={{
               color: "#050505",
@@ -72,7 +69,7 @@ export const Default = (
             }}
           >
             SHOP.CO
-          </a>
+          </Link>
 
           {/* Navigation */}
           <ul
