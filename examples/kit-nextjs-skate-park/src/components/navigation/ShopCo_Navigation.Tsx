@@ -14,7 +14,7 @@ interface ShopCoNavigationProps {
 
 export const Default = (
   props: ShopCoNavigationProps
-): JSX.Element => {
+): JSX.Element => { 
   const id = props.params.RenderingIdentifier;
 
   return (
