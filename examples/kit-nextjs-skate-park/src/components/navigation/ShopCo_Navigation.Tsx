@@ -14,28 +14,51 @@ interface ShopCoNavigationProps {
 
 export const Default = (
   props: ShopCoNavigationProps
-): JSX.Element => { 
+): JSX.Element => {
   const id = props.params.RenderingIdentifier;
 
   return (
     <div
-      className={`component ${props.params.styles}`}
-      id={id ? id : undefined}
+      className={`component ${props.params.styles ?? ""}`}
+      id={id || undefined}
+      suppressHydrationWarning
+      style={{
+        width: "100%",
+        maxWidth: "none",
+        margin: 0,
+        padding: 0,
+        boxSizing: "border-box",
+      }}
     >
-      <div className="component-content">
-
+      <div
+        className="component-content"
+        style={{
+          width: "100%",
+          maxWidth: "none",
+          margin: 0,
+          padding: 0,
+          boxSizing: "border-box",
+        }}
+      >
         <nav
           style={{
+            width: "100%",
+            maxWidth: "none",
+            margin: 0,
+            boxSizing: "border-box",
+
             display: "flex",
             alignItems: "center",
-            height: "68px",
+
+            minHeight: "68px",
             padding: "0 40px",
+
             backgroundColor: "#ffffff",
             boxShadow: "0 4px 14px rgba(0, 0, 0, 0.08)",
+
             fontFamily: "Arial, Helvetica, sans-serif",
           }}
         >
-
           {/* Logo */}
           <a
             href="/"
@@ -62,29 +85,27 @@ export const Default = (
               padding: 0,
             }}
           >
-            {[
-              "Shop",
-              "On Sale",
-              "New Arrivals",
-              "Brands",
-            ].map((item) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  style={{
-                    color: "#171717",
-                    textDecoration: "none",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                  }}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            {["Shop", "On Sale", "New Arrivals", "Brands"].map(
+              (item) => (
+                <li key={item}>
+                  <a
+                    href="#"
+                    style={{
+                      color: "#171717",
+                      textDecoration: "none",
+                      fontSize: "14px",
+                      fontWeight: 400,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {item}
+                  </a>
+                </li>
+              )
+            )}
           </ul>
 
-          {/* Right-side icons */}
+          {/* Actions */}
           <div
             style={{
               marginLeft: "auto",
@@ -93,7 +114,6 @@ export const Default = (
               gap: "18px",
             }}
           >
-
             {/* Cart */}
             <button
               type="button"
@@ -159,10 +179,8 @@ export const Default = (
                 <path d="M7.5 18c.9-2.2 2.4-3.3 4.5-3.3s3.6 1.1 4.5 3.3" />
               </svg>
             </button>
-
           </div>
         </nav>
-
       </div>
     </div>
   );
