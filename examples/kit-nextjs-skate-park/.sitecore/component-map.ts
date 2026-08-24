@@ -17,11 +17,12 @@ import * as CustomBanner from 'src/components/promo/CustomBanner';
 import * as PartialDesignDynamicPlaceholder from 'src/components/partial-design-dynamic-placeholder/PartialDesignDynamicPlaceholder';
 import * as PageContent from 'src/components/page-content/PageContent';
 import * as CustomRichText from 'src/components/page-content/CustomRichText';
-import * as ShopCoNavigation from 'components/navigation/ShopCoNavigation'
+import * as ShopCoNavigation from 'src/components/navigation/ShopCoNavigation';
 import * as Navigation from 'src/components/navigation/Navigation';
 import * as CustomNavigation from 'src/components/navigation/CustomNavigation';
 import * as LinkList from 'src/components/link-list/LinkList';
 import * as Image from 'src/components/image/Image';
+import * as ShopCoFooter from 'src/components/footer/ShopCoFooter';
 import * as ContentBlock from 'src/components/content-block/ContentBlock';
 import * as Container from 'src/components/container/Container';
 import * as ColumnSplitter from 'src/components/column-splitter/ColumnSplitter';
@@ -48,6 +49,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['CustomNavigation', { ...CustomNavigation }],
   ['LinkList', { ...LinkList }],
   ['Image', { ...Image }],
+  ['ShopCoFooter', { ...ShopCoFooter }],
   ['ContentBlock', { ...ContentBlock }],
   ['Container', { ...Container }],
   ['ColumnSplitter', { ...ColumnSplitter }],
