@@ -1,25 +1,28 @@
 import React, { JSX } from "react";
+
 import {
   ComponentParams,
   ComponentRendering,
 } from "@sitecore-content-sdk/nextjs";
-import { RichText as ContentSdkRichText } from "@sitecore-content-sdk/nextjs";
 
 interface RichTextBlockAProps {
-  rendering: ComponentRendering & { params: ComponentParams };
+  rendering: ComponentRendering & {
+    params: ComponentParams;
+  };
   params: ComponentParams;
 }
 
-export const Default = (props: RichTextBlockAProps): JSX.Element => {
+export const Default = (
+  props: RichTextBlockAProps
+): JSX.Element => {
   const id = props.params.RenderingIdentifier;
-  // const text = props.rendering.fields?.text.value;
 
   console.log(props);
 
   return (
     <div
-      className={`component ${props.params.styles}`}
-      id={id ? id : undefined}
+      className={`component ${props.params.styles ?? ""}`}
+      id={id || undefined}
     >
       <div className="component-content">
         <nav
@@ -28,7 +31,8 @@ export const Default = (props: RichTextBlockAProps): JSX.Element => {
             justifyContent: "space-between",
             alignItems: "center",
             padding: "12px 24px",
-            background: "linear-gradient(90deg, #0f9d58, #34a853, #66bb6a)",
+            background:
+              "linear-gradient(90deg, #0f9d58, #34a853, #66bb6a)",
             color: "white",
             fontFamily: "Arial, sans-serif",
           }}
@@ -45,7 +49,12 @@ export const Default = (props: RichTextBlockAProps): JSX.Element => {
             }}
           >
             {["Home", "About", "Services", "Contact"].map((item) => (
-              <li key={item} style={{ cursor: "pointer" }}>
+              <li
+                key={item}
+                style={{
+                  cursor: "pointer",
+                }}
+              >
                 {item}
               </li>
             ))}
