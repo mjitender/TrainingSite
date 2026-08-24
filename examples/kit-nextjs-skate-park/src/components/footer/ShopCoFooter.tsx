@@ -125,7 +125,7 @@ export const Default = (
               >
                 We have clothes that suits your style and
                 <br />
-                which you're proud to wear. From
+                which you&apos;re proud to wear. From
                 <br />
                 women to men.
               </p>
