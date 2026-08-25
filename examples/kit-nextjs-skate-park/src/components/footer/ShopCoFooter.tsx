@@ -13,22 +13,23 @@ interface ShopCoFooterProps {
   params: ComponentParams;
 }
 
-export const Default = (
-  props: ShopCoFooterProps
-): JSX.Element => {
+export const Default = (props: ShopCoFooterProps): JSX.Element => {
   const id = props.params.RenderingIdentifier;
 
   const footerLinkStyle: React.CSSProperties = {
     color: "#777",
     textDecoration: "none",
-    fontSize: "11px",
-    lineHeight: 1,
-    marginBottom: "16px",
+    fontSize: "clamp(10px, 1vw, 11px)",
+    lineHeight: 1.35,
+    marginBottom: "clamp(12px, 1.5vw, 16px)",
+    maxWidth: "100%",
+    overflowWrap: "anywhere",
   };
 
   const socialStyle: React.CSSProperties = {
     width: "18px",
     height: "18px",
+    minWidth: "18px",
     borderRadius: "50%",
     backgroundColor: "#fff",
     color: "#111",
@@ -36,11 +37,13 @@ export const Default = (
     alignItems: "center",
     justifyContent: "center",
     textDecoration: "none",
+    flexShrink: 0,
   };
 
   const paymentStyle: React.CSSProperties = {
     width: "38px",
     height: "23px",
+    minWidth: "38px",
     borderRadius: "5px",
     backgroundColor: "#fff",
     display: "flex",
@@ -50,6 +53,24 @@ export const Default = (
     fontWeight: 700,
     color: "#111",
     boxSizing: "border-box",
+    flexShrink: 0,
+  };
+
+  const columnStyle: React.CSSProperties = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    minWidth: 0,
+    maxWidth: "100%",
+    flex: "1 1 130px",
+  };
+
+  const headingStyle: React.CSSProperties = {
+    margin: "1px 0 17px",
+    fontSize: "clamp(10px, 1vw, 11px)",
+    fontWeight: 500,
+    letterSpacing: "clamp(1.5px, 0.2vw, 2px)",
+    maxWidth: "100%",
   };
 
   return (
@@ -58,46 +79,69 @@ export const Default = (
       id={id || undefined}
       style={{
         width: "100%",
+        maxWidth: "100%",
+        minWidth: 0,
         margin: 0,
         padding: 0,
         boxSizing: "border-box",
+        overflowX: "hidden",
       }}
     >
       <div
         className="component-content"
         style={{
           width: "100%",
+          maxWidth: "100%",
+          minWidth: 0,
           margin: 0,
           padding: 0,
+          boxSizing: "border-box",
         }}
       >
         <footer
           style={{
             width: "100%",
+            maxWidth: "100%",
+            minWidth: 0,
+            margin: 0,
+            padding:
+              "clamp(30px, 5vw, 48px) clamp(16px, 5vw, 60px) 22px",
             boxSizing: "border-box",
+            overflow: "hidden",
             backgroundColor: "#f0f0f0",
             color: "#111",
             fontFamily: "Arial, Helvetica, sans-serif",
-            padding: "48px 60px 22px",
           }}
         >
-          {/* Main footer */}
+          {/* =========================
+              MAIN FOOTER
+          ========================= */}
+
           <div
             style={{
               width: "100%",
               maxWidth: "1200px",
+              minWidth: 0,
               margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "2.1fr repeat(4, 1fr)",
-              gap: "50px",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "flex-start",
+              gap: "clamp(28px, 4vw, 50px)",
+              boxSizing: "border-box",
             }}
           >
-            {/* Brand */}
+            {/* =========================
+                BRAND
+            ========================= */}
+
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
+                minWidth: 0,
+                maxWidth: "100%",
+                flex: "2.1 1 280px",
               }}
             >
               <Link
@@ -105,11 +149,12 @@ export const Default = (
                 style={{
                   color: "#050505",
                   textDecoration: "none",
-                  fontSize: "25px",
+                  fontSize: "clamp(22px, 2vw, 25px)",
                   fontWeight: 900,
                   letterSpacing: "-1.8px",
                   lineHeight: 1,
                   marginBottom: "16px",
+                  maxWidth: "100%",
                 }}
               >
                 SHOP.CO
@@ -118,22 +163,22 @@ export const Default = (
               <p
                 style={{
                   color: "#777",
-                  fontSize: "11px",
+                  fontSize: "clamp(10px, 1vw, 11px)",
                   lineHeight: 1.55,
                   margin: 0,
+                  maxWidth: "250px",
+                  overflowWrap: "break-word",
                 }}
               >
-                We have clothes that suits your style and
-                <br />
-                which you&apos;re proud to wear. From
-                <br />
-                women to men.
+                We have clothes that suits your style and which you&apos;re
+                proud to wear. From women to men.
               </p>
 
               {/* Social icons */}
               <div
                 style={{
                   display: "flex",
+                  flexWrap: "wrap",
                   gap: "9px",
                   marginTop: "22px",
                 }}
@@ -172,125 +217,131 @@ export const Default = (
               </div>
             </div>
 
-            {/* Company */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "1px 0 17px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  letterSpacing: "2px",
-                }}
-              >
+            {/* =========================
                 COMPANY
-              </h3>
+            ========================= */}
 
-              <a href="#" style={footerLinkStyle}>About</a>
-              <a href="#" style={footerLinkStyle}>Features</a>
-              <a href="#" style={footerLinkStyle}>Works</a>
-              <a href="#" style={footerLinkStyle}>Career</a>
+            <div style={columnStyle}>
+              <h3 style={headingStyle}>COMPANY</h3>
+
+              <a href="#" style={footerLinkStyle}>
+                About
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Features
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Works
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Career
+              </a>
             </div>
 
-            {/* Help */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "1px 0 17px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  letterSpacing: "2px",
-                }}
-              >
+            {/* =========================
                 HELP
-              </h3>
+            ========================= */}
 
-              <a href="#" style={footerLinkStyle}>Customer Support</a>
-              <a href="#" style={footerLinkStyle}>Delivery Details</a>
-              <a href="#" style={footerLinkStyle}>Terms & Conditions</a>
-              <a href="#" style={footerLinkStyle}>Privacy Policy</a>
+            <div style={columnStyle}>
+              <h3 style={headingStyle}>HELP</h3>
+
+              <a href="#" style={footerLinkStyle}>
+                Customer Support
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Delivery Details
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Terms & Conditions
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Privacy Policy
+              </a>
             </div>
 
-            {/* FAQ */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "1px 0 17px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  letterSpacing: "2px",
-                }}
-              >
+            {/* =========================
                 FAQ
-              </h3>
+            ========================= */}
 
-              <a href="#" style={footerLinkStyle}>Account</a>
-              <a href="#" style={footerLinkStyle}>Manage Deliveries</a>
-              <a href="#" style={footerLinkStyle}>Orders</a>
-              <a href="#" style={footerLinkStyle}>Payments</a>
+            <div style={columnStyle}>
+              <h3 style={headingStyle}>FAQ</h3>
+
+              <a href="#" style={footerLinkStyle}>
+                Account
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Manage Deliveries
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Orders
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Payments
+              </a>
             </div>
 
-            {/* Resources */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "1px 0 17px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  letterSpacing: "2px",
-                }}
-              >
+            {/* =========================
                 RESOURCES
-              </h3>
+            ========================= */}
 
-              <a href="#" style={footerLinkStyle}>Free eBooks</a>
-              <a href="#" style={footerLinkStyle}>Development Tutorial</a>
-              <a href="#" style={footerLinkStyle}>How-to - Blog</a>
-              <a href="#" style={footerLinkStyle}>Youtube Playlist</a>
+            <div style={columnStyle}>
+              <h3 style={headingStyle}>RESOURCES</h3>
+
+              <a href="#" style={footerLinkStyle}>
+                Free eBooks
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Development Tutorial
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                How-to - Blog
+              </a>
+
+              <a href="#" style={footerLinkStyle}>
+                Youtube Playlist
+              </a>
             </div>
           </div>
 
-          {/* Bottom section */}
+          {/* =========================
+              BOTTOM SECTION
+          ========================= */}
+
           <div
             style={{
               width: "100%",
               maxWidth: "1200px",
+              minWidth: 0,
               margin: "18px auto 0",
               paddingTop: "13px",
               borderTop: "1px solid #dcdcdc",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "15px",
+              boxSizing: "border-box",
             }}
           >
+            {/* Copyright */}
             <p
               style={{
                 margin: 0,
                 color: "#777",
-                fontSize: "10px",
+                fontSize: "clamp(9px, 1vw, 10px)",
+                maxWidth: "100%",
+                overflowWrap: "break-word",
               }}
             >
               Shop.co © 2000-2023, All Rights Reserved
@@ -301,9 +352,13 @@ export const Default = (
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "7px",
+                justifyContent: "flex-end",
+                flexWrap: "wrap",
+                gap: "clamp(5px, 0.7vw, 7px)",
+                maxWidth: "100%",
               }}
             >
+              {/* VISA */}
               <div
                 style={{
                   ...paymentStyle,
@@ -315,6 +370,7 @@ export const Default = (
                 VISA
               </div>
 
+              {/* Mastercard */}
               <div
                 style={{
                   ...paymentStyle,
@@ -329,6 +385,8 @@ export const Default = (
                     backgroundColor: "#eb001b",
                     position: "absolute",
                     left: "9px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
                   }}
                 />
 
@@ -340,10 +398,13 @@ export const Default = (
                     backgroundColor: "#f79e1b",
                     position: "absolute",
                     right: "9px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
                   }}
                 />
               </div>
 
+              {/* PayPal */}
               <div
                 style={{
                   ...paymentStyle,
@@ -355,6 +416,7 @@ export const Default = (
                 Pay<span style={{ color: "#009cde" }}>Pal</span>
               </div>
 
+              {/* Apple Pay */}
               <div
                 style={{
                   ...paymentStyle,
@@ -364,6 +426,7 @@ export const Default = (
                 Pay
               </div>
 
+              {/* Google Pay */}
               <div
                 style={{
                   ...paymentStyle,

@@ -31,6 +31,154 @@ export const Default = (
         boxSizing: "border-box",
       }}
     >
+      <style>
+        {`
+          .shopco-navigation {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            min-height: 68px;
+            padding: 0 40px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            font-family: Arial, Helvetica, sans-serif;
+          }
+
+          .shopco-logo {
+            color: #050505;
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: -1.8px;
+            white-space: nowrap;
+          }
+
+          .shopco-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+            margin: 0 0 0 56px;
+            padding: 0;
+          }
+
+          .shopco-nav-links a {
+            color: #171717;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            white-space: nowrap;
+          }
+
+          .shopco-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+          }
+
+          .shopco-action-button {
+            width: 22px;
+            height: 22px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: #050505;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .shopco-menu-button {
+            display: none;
+            width: 22px;
+            height: 22px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: #050505;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+          }
+
+          /* Tablet */
+          @media (max-width: 900px) {
+            .shopco-navigation {
+              padding: 0 28px;
+            }
+
+            .shopco-nav-links {
+              gap: 22px;
+              margin-left: 36px;
+            }
+
+            .shopco-nav-links a {
+              font-size: 13px;
+            }
+          }
+
+          /* Mobile */
+          @media (max-width: 700px) {
+            .shopco-navigation {
+              min-height: 60px;
+              padding: 0 20px;
+            }
+
+            .shopco-logo {
+              font-size: 22px;
+              letter-spacing: -1.5px;
+            }
+
+            .shopco-nav-links {
+              display: none;
+            }
+
+            .shopco-actions {
+              gap: 14px;
+            }
+
+            .shopco-action-button {
+              width: 20px;
+              height: 20px;
+            }
+
+            .shopco-action-button svg {
+              width: 19px;
+              height: 19px;
+            }
+
+            .shopco-menu-button {
+              display: flex;
+            }
+
+            .shopco-menu-button svg {
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          /* Small phones */
+          @media (max-width: 400px) {
+            .shopco-navigation {
+              padding: 0 16px;
+            }
+
+            .shopco-logo {
+              font-size: 20px;
+            }
+
+            .shopco-actions {
+              gap: 11px;
+            }
+          }
+        `}
+      </style>
+
       <div
         className="component-content"
         style={{
@@ -41,60 +189,22 @@ export const Default = (
           boxSizing: "border-box",
         }}
       >
-        <nav
-          style={{
-            width: "100%",
-            maxWidth: "none",
-            margin: 0,
-            boxSizing: "border-box",
-            display: "flex",
-            alignItems: "center",
-            minHeight: "68px",
-            padding: "0 40px",
-            backgroundColor: "#ffffff",
-            boxShadow: "0 4px 14px rgba(0, 0, 0, 0.08)",
-            fontFamily: "Arial, Helvetica, sans-serif",
-          }}
-        >
+        <nav className="shopco-navigation">
+
           {/* Logo */}
           <Link
             href="/"
-            style={{
-              color: "#050505",
-              textDecoration: "none",
-              fontSize: "25px",
-              fontWeight: 900,
-              letterSpacing: "-1.8px",
-              whiteSpace: "nowrap",
-            }}
+            className="shopco-logo"
           >
             SHOP.CO
           </Link>
 
-          {/* Navigation */}
-          <ul
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "32px",
-              listStyle: "none",
-              margin: "0 0 0 56px",
-              padding: 0,
-            }}
-          >
+          {/* Desktop Navigation */}
+          <ul className="shopco-nav-links">
             {["Shop", "On Sale", "New Arrivals", "Brands"].map(
               (item) => (
                 <li key={item}>
-                  <a
-                    href="#"
-                    style={{
-                      color: "#171717",
-                      textDecoration: "none",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
+                  <a href="#">
                     {item}
                   </a>
                 </li>
@@ -103,30 +213,13 @@ export const Default = (
           </ul>
 
           {/* Actions */}
-          <div
-            style={{
-              marginLeft: "auto",
-              display: "flex",
-              alignItems: "center",
-              gap: "18px",
-            }}
-          >
+          <div className="shopco-actions">
+
             {/* Cart */}
             <button
               type="button"
               aria-label="Shopping cart"
-              style={{
-                width: "22px",
-                height: "22px",
-                padding: 0,
-                border: "none",
-                background: "transparent",
-                color: "#050505",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="shopco-action-button"
             >
               <svg
                 width="21"
@@ -148,18 +241,7 @@ export const Default = (
             <button
               type="button"
               aria-label="Account"
-              style={{
-                width: "22px",
-                height: "22px",
-                padding: 0,
-                border: "none",
-                background: "transparent",
-                color: "#050505",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+              className="shopco-action-button"
             >
               <svg
                 width="21"
@@ -176,6 +258,26 @@ export const Default = (
                 <path d="M7.5 18c.9-2.2 2.4-3.3 4.5-3.3s3.6 1.1 4.5 3.3" />
               </svg>
             </button>
+
+            {/* Mobile Menu */}
+            <button
+              type="button"
+              aria-label="Open navigation menu"
+              className="shopco-menu-button"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+              </svg>
+            </button>
+
           </div>
         </nav>
       </div>
