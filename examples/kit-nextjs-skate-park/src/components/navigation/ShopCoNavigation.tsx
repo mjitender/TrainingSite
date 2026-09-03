@@ -18,6 +18,8 @@ export const Default = (
 ): JSX.Element => {
   const id = props.params.RenderingIdentifier;
 
+  const navItems = ["Shop", "On Sale", "New Arrivals", "Brands"];
+
   return (
     <div
       className={`component ${props.params.styles ?? ""}`}
@@ -45,6 +47,8 @@ export const Default = (
             background-color: #ffffff;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
             font-family: Arial, Helvetica, sans-serif;
+            position: relative;
+            z-index: 1000;
           }
 
           .shopco-logo {
@@ -73,6 +77,10 @@ export const Default = (
             white-space: nowrap;
           }
 
+          .shopco-nav-links a:hover {
+            color: #555555;
+          }
+
           .shopco-actions {
             margin-left: auto;
             display: flex;
@@ -93,6 +101,16 @@ export const Default = (
             justify-content: center;
           }
 
+          .shopco-action-button svg {
+            width: 21px;
+            height: 21px;
+          }
+
+          /* Mobile menu */
+          .shopco-mobile-menu {
+            display: none;
+          }
+
           .shopco-menu-button {
             display: none;
             width: 22px;
@@ -104,6 +122,76 @@ export const Default = (
             cursor: pointer;
             align-items: center;
             justify-content: center;
+            list-style: none;
+          }
+
+          .shopco-menu-button::-webkit-details-marker {
+            display: none;
+          }
+
+          .shopco-menu-button::marker {
+            display: none;
+          }
+
+          .shopco-menu-button svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          .shopco-menu-icon-close {
+            display: none;
+          }
+
+          .shopco-mobile-menu[open] .shopco-menu-icon-open {
+            display: none;
+          }
+
+          .shopco-mobile-menu[open] .shopco-menu-icon-close {
+            display: block;
+          }
+
+          /* Dropdown is positioned relative to .shopco-navigation */
+          .shopco-mobile-menu-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #eeeeee;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 999;
+          }
+
+          .shopco-mobile-menu-content ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+          }
+
+          .shopco-mobile-menu-content li {
+            border-bottom: 1px solid #eeeeee;
+          }
+
+          .shopco-mobile-menu-content li:last-child {
+            border-bottom: none;
+          }
+
+          .shopco-mobile-menu-content a {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 16px 4px;
+            color: #171717;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          .shopco-mobile-menu-content a:hover {
+            background-color: #f8f8f8;
           }
 
           /* Tablet */
@@ -152,13 +240,12 @@ export const Default = (
               height: 19px;
             }
 
-            .shopco-menu-button {
-              display: flex;
+            .shopco-mobile-menu {
+              display: block;
             }
 
-            .shopco-menu-button svg {
-              width: 20px;
-              height: 20px;
+            .shopco-menu-button {
+              display: flex;
             }
           }
 
@@ -174,6 +261,10 @@ export const Default = (
 
             .shopco-actions {
               gap: 11px;
+            }
+
+            .shopco-mobile-menu-content {
+              padding: 16px;
             }
           }
         `}
@@ -201,15 +292,13 @@ export const Default = (
 
           {/* Desktop Navigation */}
           <ul className="shopco-nav-links">
-            {["Shop", "On Sale", "New Arrivals", "Brands"].map(
-              (item) => (
-                <li key={item}>
-                  <a href="#">
-                    {item}
-                  </a>
-                </li>
-              )
-            )}
+            {navItems.map((item) => (
+              <li key={item}>
+                <a href="#">
+                  {item}
+                </a>
+              </li>
+            ))}
           </ul>
 
           {/* Actions */}
@@ -260,23 +349,55 @@ export const Default = (
             </button>
 
             {/* Mobile Menu */}
-            <button
-              type="button"
-              aria-label="Open navigation menu"
-              className="shopco-menu-button"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
+            <details className="shopco-mobile-menu">
+
+              {/* Menu Button */}
+              <summary
+                className="shopco-menu-button"
+                aria-label="Toggle navigation menu"
               >
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-              </svg>
-            </button>
+                {/* Hamburger */}
+                <svg
+                  className="shopco-menu-icon-open"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                >
+                  <line x1="4" y1="6" x2="20" y2="6" />
+                  <line x1="4" y1="12" x2="20" y2="12" />
+                  <line x1="4" y1="18" x2="20" y2="18" />
+                </svg>
+
+                {/* Close */}
+                <svg
+                  className="shopco-menu-icon-close"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                >
+                  <line x1="5" y1="5" x2="19" y2="19" />
+                  <line x1="19" y1="5" x2="5" y2="19" />
+                </svg>
+              </summary>
+
+              {/* Mobile Navigation */}
+              <div className="shopco-mobile-menu-content">
+                <ul>
+                  {navItems.map((item) => (
+                    <li key={item}>
+                      <a href="#">
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </details>
 
           </div>
         </nav>

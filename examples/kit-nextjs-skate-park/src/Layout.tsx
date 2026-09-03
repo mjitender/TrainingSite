@@ -61,7 +61,8 @@ const Layout = ({ page, baseUrl: baseUrlProp }: LayoutProps): JSX.Element => {
       />
       {/* root placeholder for the app, which we add components to using route data */}
       <div className={mainClassPageEditing}>
-        {mode.isDesignLibrary ? (
+        <div className="overflow-x-hidden">
+          {mode.isDesignLibrary ? (
           route && (
             <DesignLibraryApp
               page={page}
@@ -110,6 +111,8 @@ const Layout = ({ page, baseUrl: baseUrlProp }: LayoutProps): JSX.Element => {
             </footer>
           </>
         )}
+        </div>
+        
       </div>
     </>
   );

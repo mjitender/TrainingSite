@@ -8,6 +8,7 @@ import * as TitleAndText from 'src/components/TitleAndText';
 import * as Title from 'src/components/title/Title';
 import * as StructuredData from 'src/components/structured-data/StructuredData';
 import * as ShopCoHeader from 'src/components/Shopco/ShopCoHeader';
+import * as ProductsCard from 'src/components/Shopco/ProductsCard';
 import * as RowSplitter from 'src/components/row-splitter/RowSplitter';
 import * as RichText from 'src/components/rich-text/RichText';
 import * as Promo from 'src/components/promo/Promo';
@@ -36,6 +37,7 @@ export const componentMap = new Map<string, NextjsContentSdkComponent>([
   ['Title', { ...Title }],
   ['StructuredData', { ...StructuredData }],
   ['ShopCoHeader', { ...ShopCoHeader }],
+  ['ProductsCard', { ...ProductsCard }],
   ['RowSplitter', { ...RowSplitter }],
   ['RichText', { ...RichText }],
   ['Promo', { ...Promo }],
